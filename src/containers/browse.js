@@ -9,7 +9,9 @@ import { FooterContainer } from './footer';
 
 export function BrowseContainer({ slides }) {
 	const [category, setCategory] = useState('series');
-	const [profile, setProfile] = useState({});
+	const [profile, setProfile] = useState(
+		JSON.parse(localStorage.getItem('profile')) || {}
+	);
 	const [loading, setLoading] = useState(true);
 	const [searchTerm, setSearchTerm] = useState('');
 	const [slideRows, setSlideRows] = useState([]);
@@ -26,6 +28,14 @@ export function BrowseContainer({ slides }) {
 	useEffect(() => {
 		setSlideRows(slides[category]);
 	}, [slides, category]);
+
+	useEffect(() => {
+		if (profile) {
+			localStorage.setItem('profile', JSON.stringify(profile));
+		} else {
+			localStorage.removeItem('profile');
+		}
+	}, [profile]);
 
 	useEffect(() => {
 		const fuse = new Fuse(slideRows, {
@@ -90,9 +100,10 @@ export function BrowseContainer({ slides }) {
 								</Header.Group>
 								<Header.Group>
 									<Header.TextLink
-										onClick={() =>
-											firebase.auth().signOut()
-										}
+										onClick={() => {
+											firebase.auth().signOut();
+											localStorage.removeItem('profile');
+										}}
 									>
 										Sign out
 									</Header.TextLink>
@@ -113,7 +124,7 @@ export function BrowseContainer({ slides }) {
 						job as a clown, and the guise he projects in a futile
 						attempt to feel like he's part of the world around him.
 					</Header.Text>
-					<Header.PlayButton>Play</Header.PlayButton>
+					<Header.PlayButton to={ROUTES.PLAY}>Play</Header.PlayButton>
 				</Header.Feature>
 			</Header>
 
@@ -140,8 +151,7 @@ export function BrowseContainer({ slides }) {
 						</Card.Entities>
 						<Card.Feature category={category}>
 							<Player>
-								<Player.Button />
-								<Player.Video src="/videos/bunny.mp4" />
+								<Player.Button to={ROUTES.PLAY} />
 							</Player>
 						</Card.Feature>
 					</Card>

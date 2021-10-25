@@ -27,7 +27,7 @@ export default function Signup() {
 				});
 			})
 			.then(() => {
-				history.push(ROUTES.BROWSE);
+				history.push(ROUTES.SPLASH);
 			})
 			.catch(error => {
 				setFirstName('');

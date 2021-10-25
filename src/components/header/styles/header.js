@@ -210,9 +210,10 @@ export const Logo = styled.img`
 	}
 `;
 
-export const PlayButton = styled.button`
+export const PlayButton = styled(ReachRouterLink)`
 	box-shadow: 0 0.6vw 1vw -0.4vw rgba(0, 0, 0, 0.35);
 	background-color: #e6e6e6;
+	text-decoration: none;
 	color: #000;
 	border-width: 0;
 	padding: 10px 20px;
@@ -223,6 +224,8 @@ export const PlayButton = styled.button`
 	margin-top: 10px;
 	cursor: pointer;
 	transition: background-color 0.5s ease;
+	display: inline-block !important;
+	text-align: center;
 	&:hover {
 		background-color: #ff1e1e;
 		color: white;

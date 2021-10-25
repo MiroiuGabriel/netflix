@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components/macro';
 
 export const Container = styled.div``;
@@ -57,9 +58,10 @@ export const Close = styled.button`
 	}
 `;
 
-export const Button = styled.button`
+export const Button = styled(Link)`
 	background-color: #e50914;
 	border-color: #ff0a16;
+	text-decoration: none;
 	width: 115px;
 	height: 45px;
 	text-transform: uppercase;
