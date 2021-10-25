@@ -1,8 +1,7 @@
-import { Accordion } from '../components';
-import { Item } from '../components/jumbotron/styles/jumbotron';
+import { Accordion, OptForm } from '../components';
 import faqsData from '../fixtures/faqs.json';
 
-export default function FaqsContainer() {
+export function FaqsContainer() {
 	return (
 		<Accordion>
 			<Accordion.Title>Frequently Asked Questions</Accordion.Title>
@@ -12,7 +11,15 @@ export default function FaqsContainer() {
 					<Accordion.Body>{body}</Accordion.Body>
 				</Accordion.Item>
 			))}
-			<Accordion.Item />
+			<OptForm>
+				<OptForm.Input placeholder="Email address" />
+				<OptForm.Break />
+				<OptForm.Button>Try it now</OptForm.Button>
+				<OptForm.Text>
+					Ready to watch? Enter your email to create or restart your
+					membership
+				</OptForm.Text>
+			</OptForm>
 		</Accordion>
 	);
 }
